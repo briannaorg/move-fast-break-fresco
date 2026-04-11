@@ -10,7 +10,13 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  search: (q, source) => request(`/api/search?q=${encodeURIComponent(q)}&source=${source}`),
+  search: (q, source, options = {}) => {
+    const params = new URLSearchParams({ q, source });
+    Object.entries(options).forEach(([k, v]) => v != null && v !== '' && v !== false && params.set(k, v));
+    return request(`/api/search?${params}`);
+  },
+  getDepartments: (source) => request(`/api/search/departments?source=${source}`),
+  getArtworkTypes: (source) => request(`/api/search/artwork-types?source=${source}`),
   getImages: (params = {}) => {
     const qs = new URLSearchParams(params).toString();
     return request(`/api/images${qs ? `?${qs}` : ''}`);

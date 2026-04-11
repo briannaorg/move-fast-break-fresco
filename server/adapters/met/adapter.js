@@ -6,16 +6,54 @@ async function fetchJson(url) {
   return res.json();
 }
 
-async function search(query, options = {}) {
-  const { data } = await fetchJson(`${BASE}/search?q=${encodeURIComponent(query)}&isPublicDomain=true`)
-    .then((json) => ({ data: json }));
+async function getDepartments() {
+  const data = await fetchJson(`${BASE}/departments`);
+  return (data.departments || []).map((d) => ({ id: d.departmentId, name: d.displayName }));
+}
 
-  const ids = (data.objectIDs || []).slice(0, 20);
-  if (ids.length === 0) return [];
+async function search(query, options = {}) {
+  const {
+    page = 0,
+    limit = 20,
+    departmentId,
+    isHighlight,
+    isOnView,
+    medium,
+    dateBegin,
+    dateEnd,
+    geoLocation,
+    searchIn,
+  } = options;
+
+  const params = new URLSearchParams({
+    q: query,
+    isPublicDomain: 'true',
+    hasImages: 'true',
+  });
+  if (searchIn === 'title') params.set('title', 'true');
+  if (searchIn === 'tags') params.set('tags', 'true');
+  if (departmentId) params.set('departmentId', String(departmentId));
+  if (isHighlight) params.set('isHighlight', 'true');
+  if (isOnView) params.set('isOnView', 'true');
+  if (medium) params.set('medium', medium);
+  if (dateBegin != null && dateEnd != null) {
+    params.set('dateBegin', String(dateBegin));
+    params.set('dateEnd', String(dateEnd));
+  }
+  if (geoLocation) params.set('geoLocation', geoLocation);
+
+  const data = await fetchJson(`${BASE}/search?${params}`);
+  const allIds = data.objectIDs || [];
+  const total = allIds.length;
+
+  const start = page * limit;
+  const pageIds = allIds.slice(start, start + limit);
+
+  if (pageIds.length === 0) return { results: [], total, page, limit };
 
   const results = [];
-  for (let i = 0; i < ids.length; i += 5) {
-    const batch = ids.slice(i, i + 5);
+  for (let i = 0; i < pageIds.length; i += 5) {
+    const batch = pageIds.slice(i, i + 5);
     const settled = await Promise.allSettled(batch.map((id) => getById(String(id))));
     for (const outcome of settled) {
       if (outcome.status === 'fulfilled' && outcome.value) {
@@ -23,7 +61,8 @@ async function search(query, options = {}) {
       }
     }
   }
-  return results;
+
+  return { results, total, page, limit };
 }
 
 async function getById(sourceId) {
@@ -54,4 +93,5 @@ module.exports = {
   name: 'The Met',
   search,
   getById,
+  getDepartments,
 };

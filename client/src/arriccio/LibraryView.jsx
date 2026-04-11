@@ -109,6 +109,16 @@ export default function LibraryView() {
               <div style={styles.info}>
                 <p style={styles.cardTitle}>{img.title || 'Untitled'}</p>
                 {img.artist && <p style={styles.cardSub}>{img.artist}</p>}
+                {img.source_url && (
+                  <a
+                    href={img.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={styles.sourceLink}
+                  >
+                    View on {img.source === 'met' ? 'The Met' : img.source === 'artic' ? 'Art Institute' : img.source} ↗
+                  </a>
+                )}
 
                 {img.palette?.length > 0 && (
                   <div style={styles.palette}>
@@ -194,7 +204,8 @@ const styles = {
   },
   info: { padding: '10px 12px 12px' },
   cardTitle: { fontSize: 13, fontWeight: 600, lineHeight: 1.3, marginBottom: 2 },
-  cardSub: { fontSize: 12, color: '#666', marginBottom: 8 },
+  cardSub: { fontSize: 12, color: '#666', marginBottom: 4 },
+  sourceLink: { display: 'inline-block', fontSize: 11, color: '#666', marginBottom: 8, textDecoration: 'none', borderBottom: '1px solid #ccc' },
   palette: { display: 'flex', gap: 4, marginBottom: 10 },
   swatch: { width: 16, height: 16, borderRadius: 3, display: 'inline-block' },
   tagInput: {
