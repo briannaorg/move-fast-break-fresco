@@ -5,6 +5,7 @@ import SavePanel from './SavePanel';
 const SOURCES = [
   { id: 'met', label: 'The Met' },
   { id: 'artic', label: 'Art Institute of Chicago' },
+  { id: 'nypl', label: 'NYPL Digital Collections' },
 ];
 
 const LIMIT = 20;
@@ -20,6 +21,8 @@ const EMPTY_FILTERS = {
   // ARTIC
   artworkType: '',
   placeOfOrigin: '',
+  // NYPL
+  searchField: '',
   // shared
   dateBegin: '',
   dateEnd: '',
@@ -70,6 +73,8 @@ export default function SearchView() {
     } else if (source === 'artic') {
       if (currentFilters.artworkType) options.artworkType = currentFilters.artworkType;
       if (currentFilters.placeOfOrigin) options.placeOfOrigin = currentFilters.placeOfOrigin;
+    } else if (source === 'nypl') {
+      if (currentFilters.searchField) options.searchField = currentFilters.searchField;
     }
     // date range applies to both sources
     if (currentFilters.dateBegin) options.dateBegin = currentFilters.dateBegin;
@@ -115,6 +120,8 @@ export default function SearchView() {
     // ARTIC
     source === 'artic' && filters.artworkType,
     source === 'artic' && filters.placeOfOrigin,
+    // NYPL
+    source === 'nypl' && filters.searchField,
     // shared
     filters.dateBegin || filters.dateEnd,
   ].filter(Boolean).length;
@@ -303,6 +310,20 @@ export default function SearchView() {
                     />
                   </div>
                 </>)}
+
+                {source === 'nypl' && (
+                  <div style={styles.filterField}>
+                    <label style={styles.filterLabel}>Search in</label>
+                    <select
+                      style={styles.filterSelect}
+                      value={filters.searchField}
+                      onChange={(e) => setFilter('searchField', e.target.value)}
+                    >
+                      <option value="">All fields (default)</option>
+                      <option value="title">Title only</option>
+                    </select>
+                  </div>
+                )}
 
                 <div style={styles.filterField}>
                   <label style={styles.filterLabel}>Date range</label>

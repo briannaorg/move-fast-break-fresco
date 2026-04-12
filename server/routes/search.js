@@ -8,7 +8,7 @@ router.get('/search', async (req, res, next) => {
     q, source, page, limit,
     departmentId, isHighlight, isOnView, medium,
     dateBegin, dateEnd, geoLocation, searchIn,
-    artworkType, placeOfOrigin,
+    artworkType, placeOfOrigin, searchField,
   } = req.query;
 
   if (!q || !q.trim()) {
@@ -40,6 +40,8 @@ router.get('/search', async (req, res, next) => {
     // ARTIC-specific
     if (artworkType) options.artworkType = artworkType;
     if (placeOfOrigin) options.placeOfOrigin = placeOfOrigin;
+    // NYPL-specific
+    if (searchField) options.searchField = searchField;
 
     const data = await adapter.search(q.trim(), options);
     res.json(data);

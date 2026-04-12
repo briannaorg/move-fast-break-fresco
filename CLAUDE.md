@@ -230,10 +230,14 @@ Each adapter lives in `server/adapters/<source-name>/` and exports a common inte
 ```javascript
 // adapter.js must export:
 {
-  search(query, options) → Promise<SearchResult[]>,
-  getById(sourceId)      → Promise<AssetDetail>,
+  search(query, options) → Promise<{ results, total, page, limit }>,
+  getById(sourceId)      → Promise<AssetDetail | null>,
   name: string,          // display name
   id: string,            // slug used in DB
+  // optional — if present, exposed via GET /api/search/departments?source=:id
+  getDepartments()       → Promise<{ id, name }[]>,
+  // optional — if present, exposed via GET /api/search/artwork-types?source=:id
+  getArtworkTypes()      → Promise<{ id, title }[]>,
 }
 
 // SearchResult shape:
@@ -245,15 +249,27 @@ Each adapter lives in `server/adapters/<source-name>/` and exports a common inte
   thumbnailUrl: string,
   imageUrl: string,       // highest available resolution
   license: string,        // must be public domain
+  sourceUrl: string | null, // link to the source museum's page for this work
+  metadata: object,       // source-specific fields (medium, department, etc.)
 }
 ```
 
-Adapters currently needed: Met Museum, Art Institute of Chicago. Both are implemented.  
-Additional adapters to add later: Cleveland Museum, Smithsonian, Rijksmuseum, NYPL.
+**Adapters implemented:** Met Museum (`met`), Art Institute of Chicago (`artic`), NYPL Digital Collections (`nypl`).
 
-**ARTIC IIIF images require a `User-Agent` header** — their server returns 403 on programmatic requests without one. The download utility in `server/images/pipeline.js` sets this header. Any new code that fetches ARTIC image URLs directly must do the same.
+Search returns `{ results, total, page, limit }` — not a bare array. All adapters follow this shape. The route (`GET /api/search`) accepts `page` and `limit` (capped at 40) and passes them through.
 
-See `tasks/adapters.md` for per-source API notes.
+**Per-source rate limits:**
+- Met: 80 req/sec — no throttling needed at current usage
+- ARTIC: 60 req/min — single POST per search page, well within limit
+- NYPL: 10,000 req/day — single GET per search page; no per-item calls during search
+
+**ARTIC IIIF images require a `User-Agent` header** — returns 403 without one. `pipeline.js` sets this for image downloads. ARTIC adapter API calls use `AIC-User-Agent` header instead.
+
+**NYPL API shuts down August 1, 2026** — no public replacement planned. Token stored in `NYPL_API_TOKEN` env var.
+
+**Additional adapters to add later:** Cleveland Museum, Smithsonian, Rijksmuseum, Minneapolis Institute of Art, National Gallery of Art.
+
+See `tasks/adapters.md` for per-source API notes and filter details.
 
 ---
 

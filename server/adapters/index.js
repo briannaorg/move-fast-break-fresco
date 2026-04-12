@@ -1,7 +1,8 @@
 const met = require('./met/adapter');
 const artic = require('./artic/adapter');
+const nypl = require('./nypl/adapter');
 
-const adapters = { met, artic };
+const adapters = { met, artic, nypl };
 
 function getAdapter(sourceId) {
   const adapter = adapters[sourceId];
