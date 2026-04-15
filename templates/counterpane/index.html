@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-site-title>Counterpane</title>
+
+  <!-- All font options preloaded so font-pair switching works without reload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;600&family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&family=Cormorant+Garamond:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Fixed decorative border -->
+  <div class="border-frame" aria-hidden="true"></div>
+
+  <!-- Particle canvas (populated by script.js) -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Hero section -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <h1 data-editable="site-title">Your Site Title</h1>
+      <p data-editable="site-subtitle">A collection of public domain artwork, curated with care.</p>
+      <a href="#content" class="hero-cta">Explore</a>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main id="content" class="site-content">
+    <h2 class="section-title">About This Collection</h2>
+    <div class="body-content" data-editable="body-content">
+      <p>This site was created with Fresco, a guided web creation tool built around public domain museum artwork. Every image here is freely available for use under open licenses from partner museums.</p>
+      <p>Use this space to tell visitors about your collection, your curatorial choices, or your connection to the works on display.</p>
+    </div>
+  </main>
+
+  <!-- Gallery section -->
+  <section class="gallery-section">
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Gallery items injected by script or static export -->
+    </div>
+  </section>
+
+  <footer>
+    <p>Created with <a href="#">Fresco</a> &middot; All images public domain &middot; <a href="sources.html">Image Sources</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+/* Counterpane — CSS Custom Properties (all overridable via Fresco) */
+:root {
+  --bg-image: none;
+  --particle-image: none;
+  --primary-color: #2c3e50;
+  --accent-color: #8b6f47;
+  --page-bg: #f5f0e8;
+  --text-color: #1a1a1a;
+  --heading-font: 'Playfair Display', Georgia, serif;
+  --body-font: 'Lato', system-ui, sans-serif;
+  --h1-size: 52px;
+  --body-size: 16px;
+  --border-width: 22px;
+  --particle-count: 18;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--page-bg);
+  color: var(--text-color);
+  font-family: var(--body-font);
+  font-size: var(--body-size);
+  line-height: 1.65;
+}
+
+/* ── Window Border ─────────────────────────────────────────────────────── */
+.border-frame {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  border: var(--border-width) solid var(--primary-color);
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: calc(var(--border-width) + 40px) calc(var(--border-width) + 24px);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.hero-content h1 {
+  font-family: var(--heading-font);
+  font-size: var(--h1-size);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+}
+
+.hero-content p {
+  font-size: calc(var(--body-size) * 1.2);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--accent-color);
+  color: #fff;
+  font-family: var(--body-font);
+  font-size: var(--body-size);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+.hero-cta:hover { opacity: 0.85; }
+
+/* ── Main Content ──────────────────────────────────────────────────────── */
+.site-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px calc(var(--border-width) + 40px);
+}
+
+.section-title {
+  font-family: var(--heading-font);
+  font-size: calc(var(--h1-size) * 0.56);
+  color: var(--primary-color);
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+
+.body-content {
+  font-size: var(--body-size);
+  line-height: 1.75;
+  color: var(--text-color);
+  max-width: 660px;
+}
+
+.body-content p + p {
+  margin-top: 1.2em;
+}
+
+/* ── Gallery Grid ──────────────────────────────────────────────────────── */
+.gallery-section {
+  padding: 48px calc(var(--border-width) + 40px) 80px;
+}
+
+.gallery-grid {
+  columns: 3 240px;
+  column-gap: 16px;
+}
+
+.gallery-grid-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.gallery-grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-grid-item:hover img {
+  transform: scale(1.03);
+}
+
+/* ── Particle Canvas ───────────────────────────────────────────────────── */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 32px calc(var(--border-width) + 40px) calc(var(--border-width) + 32px);
+  font-size: 12px;
+  color: rgba(0,0,0,0.38);
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+}

@@ -25,6 +25,11 @@ export const api = {
   saveImage: (body) => request('/api/images', { method: 'POST', body }),
   setTags: (id, tags) => request(`/api/images/${id}/tags`, { method: 'POST', body: { tags } }),
   getProjects: () => request('/api/projects'),
-  createProject: (name) => request('/api/projects', { method: 'POST', body: { name } }),
+  getProject: (id) => request(`/api/projects/${id}`),
+  createProject: (name, templateId) => request('/api/projects', { method: 'POST', body: { name, templateId } }),
+  updateProject: (id, body) => request(`/api/projects/${id}`, { method: 'PATCH', body }),
   deleteProject: (id) => request(`/api/projects/${id}`, { method: 'DELETE' }),
+  upsertLayer: (projectId, body) => request(`/api/projects/${projectId}/layers`, { method: 'POST', body }),
+  getTemplates: () => request('/api/templates'),
+  getTemplate: (id) => request(`/api/templates/${id}`),
 };

@@ -1,0 +1,100 @@
+{
+  "id": "counterpane",
+  "name": "Counterpane",
+  "version": "1.0.0",
+  "description": "Quilt-inspired bordered layout with masonry image grid",
+  "files": {
+    "html": "index.html",
+    "css": "style.css",
+    "js": "script.js"
+  },
+  "layers": {
+    "background": {
+      "label": "Background",
+      "required": true,
+      "multiple": false,
+      "accepts": ["background", "landscape", "texture", "painting"],
+      "cssVar": "--bg-image"
+    },
+    "particles": {
+      "label": "Scattered Elements",
+      "required": false,
+      "multiple": false,
+      "accepts": ["ornament", "decorative", "detail"],
+      "cssVar": "--particle-image",
+      "behavior": "particle-system",
+      "defaultCount": 18
+    }
+  },
+  "colors": {
+    "primary": {
+      "label": "Primary Color",
+      "cssVar": "--primary-color",
+      "default": "#2c3e50",
+      "canUseFromPalette": true
+    },
+    "accent": {
+      "label": "Accent Color",
+      "cssVar": "--accent-color",
+      "default": "#8b6f47",
+      "canUseFromPalette": true
+    },
+    "background": {
+      "label": "Page Background",
+      "cssVar": "--page-bg",
+      "default": "#f5f0e8",
+      "canUseFromPalette": false
+    },
+    "text": {
+      "label": "Body Text",
+      "cssVar": "--text-color",
+      "default": "#1a1a1a",
+      "canUseFromPalette": false
+    }
+  },
+  "typography": {
+    "fontPair": {
+      "label": "Font Pairing",
+      "cssVars": { "heading": "--heading-font", "body": "--body-font" },
+      "options": [
+        { "name": "Playfair + Lato", "heading": "Playfair Display", "body": "Lato" },
+        { "name": "Merriweather + Open Sans", "heading": "Merriweather", "body": "Open Sans" },
+        { "name": "Cormorant + Nunito", "heading": "Cormorant Garamond", "body": "Nunito" }
+      ]
+    },
+    "sizes": {
+      "h1": { "label": "Heading Size", "cssVar": "--h1-size", "default": "52px", "min": 28, "max": 96, "unit": "px" },
+      "body": { "label": "Body Size", "cssVar": "--body-size", "default": "16px", "min": 12, "max": 24, "unit": "px" }
+    }
+  },
+  "components": {
+    "window-border": {
+      "label": "Window Border",
+      "enabled": true,
+      "toggleable": false,
+      "settings": {
+        "width": { "label": "Border Width", "cssVar": "--border-width", "default": "22px", "min": 0, "max": 80, "unit": "px" }
+      }
+    },
+    "particles": {
+      "label": "Particle Density",
+      "enabled": true,
+      "toggleable": true,
+      "settings": {
+        "count": { "label": "Count", "cssVar": "--particle-count", "default": "18", "min": 0, "max": 60, "unit": "" }
+      }
+    }
+  },
+  "pages": {
+    "supportMultiple": true,
+    "defaultPages": ["index", "about", "gallery"],
+    "requiresSourcesPage": true
+  },
+  "content": {
+    "editableAreas": [
+      { "selector": "[data-editable='site-title']", "type": "heading", "maxLength": 80 },
+      { "selector": "[data-editable='site-subtitle']", "type": "text", "maxLength": 160 },
+      { "selector": "[data-editable='body-content']", "type": "richtext" }
+    ]
+  }
+}

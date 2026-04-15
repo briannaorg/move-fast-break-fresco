@@ -8,6 +8,8 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3001',
       '/storage': 'http://localhost:3001',
+      '/preview': 'http://localhost:3001',
+      '/templates': 'http://localhost:3001',
     },
   },
   build: {

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const layers = [
   { to: '/arriccio', label: 'Arriccio', sub: 'Curate' },
-  { to: '/sinopia/new', label: 'Sinopia', sub: 'Design' },
+  { to: '/arriccio/projects', label: 'Sinopia', sub: 'Design' },
   { to: '/intonaco/new', label: 'Intonaco', sub: 'Publish' },
 ];
 
