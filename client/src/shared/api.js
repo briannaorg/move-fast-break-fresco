@@ -32,4 +32,9 @@ export const api = {
   upsertLayer: (projectId, body) => request(`/api/projects/${projectId}/layers`, { method: 'POST', body }),
   getTemplates: () => request('/api/templates'),
   getTemplate: (id) => request(`/api/templates/${id}`),
+  getPages: (projectId) => request(`/api/projects/${projectId}/pages`),
+  createPage: (projectId, pageName) => request(`/api/projects/${projectId}/pages`, { method: 'POST', body: { pageName } }),
+  updatePage: (projectId, pageId, body) => request(`/api/projects/${projectId}/pages/${pageId}`, { method: 'PATCH', body }),
+  deletePage: (projectId, pageId) => request(`/api/projects/${projectId}/pages/${pageId}`, { method: 'DELETE' }),
+  reorderPages: (projectId, ids) => request(`/api/projects/${projectId}/pages/order`, { method: 'PATCH', body: { ids } }),
 };

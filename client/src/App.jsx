@@ -5,7 +5,7 @@ import SearchView from './arriccio/SearchView';
 import LibraryView from './arriccio/LibraryView';
 import ProjectsList from './arriccio/ProjectsList';
 import SinopiaView from './sinopia/SinopiaView';
-import IntonacoPlaceholder from './intonaco/Placeholder';
+import IntonacoView from './intonaco/IntonacoView';
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
             <Route path="projects" element={<ProjectsList />} />
           </Route>
           <Route path="/sinopia/:projectId" element={<SinopiaView />} />
-          <Route path="/intonaco/:projectId" element={<IntonacoPlaceholder />} />
+          <Route path="/intonaco/:projectId" element={<IntonacoView />} />
         </Routes>
       </main>
     </BrowserRouter>

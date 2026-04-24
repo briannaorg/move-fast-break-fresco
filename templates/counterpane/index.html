@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ siteTitle | default("Counterpane") }}</title>
 
-  {# Font preconnects and Google Fonts link — only for the active font pair #}
   {% if fontLinks %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="{{ fontLinks }}" rel="stylesheet" />
   {% endif %}
 
-  {# Resolved CSS custom properties #}
   <style>
 :root {
 {{ cssVars }}
@@ -30,8 +28,8 @@
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-content">
-      <h1 data-editable="site-title">Your Site Title</h1>
-      <p data-editable="site-subtitle">A collection of public domain artwork, curated with care.</p>
+      <h1 data-editable="site-title">{{ pageContent["site-title"] | default("Your Site Title") | safe }}</h1>
+      <p data-editable="site-subtitle">{{ pageContent["site-subtitle"] | default("A collection of public domain artwork, curated with care.") | safe }}</p>
       <a href="#content" class="hero-cta">Explore</a>
     </div>
   </section>
@@ -39,8 +37,7 @@
   <main id="content" class="site-content">
     <h2 class="section-title">About This Collection</h2>
     <div class="body-content" data-editable="body-content">
-      <p>This site was created with Fresco, a guided web creation tool built around public domain museum artwork. Every image here is freely available for use under open licenses from partner museums.</p>
-      <p>Use this space to tell visitors about your collection, your curatorial choices, or your connection to the works on display.</p>
+      {{ pageContent["body-content"] | default("<p>This site was created with Fresco, a guided web creation tool built around public domain museum artwork. Every image here is freely available for use under open licenses from partner museums.</p><p>Use this space to tell visitors about your collection, your curatorial choices, or your connection to the works on display.</p>") | safe }}
     </div>
   </main>
 
@@ -52,9 +49,8 @@
     <p>Created with <a href="#">Fresco</a> &middot; All images public domain &middot; <a href="sources.html">Image Sources</a></p>
   </footer>
 
-  {# postMessage listener injected by preview endpoint #}
   {{ listenerScript | safe }}
-
+  {{ editScript | safe }}
   <script src="/templates/counterpane/script.js"></script>
 </body>
 </html>

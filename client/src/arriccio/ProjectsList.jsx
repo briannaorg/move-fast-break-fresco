@@ -92,7 +92,13 @@ export default function ProjectsList() {
                 style={styles.configureBtn}
                 onClick={() => navigate(`/sinopia/${project.id}`)}
               >
-                Configure →
+                Design
+              </button>
+              <button
+                style={styles.configureBtn}
+                onClick={() => navigate(`/intonaco/${project.id}`)}
+              >
+                Content →
               </button>
               <button
                 style={styles.deleteBtn}

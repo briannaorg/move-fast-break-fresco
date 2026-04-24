@@ -10,6 +10,8 @@ const imageRoutes = require('./routes/images');
 const projectRoutes = require('./routes/projects');
 const { router: templateRoutes, TEMPLATES_DIR } = require('./routes/templates');
 const previewRoutes = require('./routes/preview');
+const pageRoutes = require('./routes/pages');
+const exportRoutes = require('./routes/export');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -34,6 +36,8 @@ app.use('/api', searchRoutes);
 app.use('/api', imageRoutes);
 app.use('/api', projectRoutes);
 app.use('/api', templateRoutes);
+app.use('/api', pageRoutes);
+app.use('/api', exportRoutes);
 
 // Preview (non-API — returns full HTML documents)
 app.use(previewRoutes);

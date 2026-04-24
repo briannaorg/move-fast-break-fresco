@@ -22,8 +22,10 @@ export default function TypographyPanel({ typography, customizations, onChange }
   function handleFontPairChange(pairName) {
     const pair = fontPair.options.find((o) => o.name === pairName);
     if (!pair) return;
-    onChange(fontPair.cssVars.heading, `'${pair.heading}', serif`);
-    onChange(fontPair.cssVars.body, `'${pair.body}', sans-serif`);
+    onChange({
+      [fontPair.cssVars.heading]: `'${pair.heading}', serif`,
+      [fontPair.cssVars.body]: `'${pair.body}', sans-serif`,
+    });
   }
 
   return (

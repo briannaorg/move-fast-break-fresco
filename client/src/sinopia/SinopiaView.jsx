@@ -87,10 +87,11 @@ export default function SinopiaView() {
 
   // ── Customization change handler ──────────────────────────────────────────
 
-  function handleCustomizationChange(cssVar, value) {
-    const next = { ...customizations, [cssVar]: value };
+  function handleCustomizationChange(cssVarOrObj, value) {
+    const updates = typeof cssVarOrObj === 'object' ? cssVarOrObj : { [cssVarOrObj]: value };
+    const next = { ...customizations, ...updates };
     setCustomizations(next);
-    sendVarsToIframe({ [cssVar]: value });
+    sendVarsToIframe(updates);
     scheduleSave(next);
   }
 

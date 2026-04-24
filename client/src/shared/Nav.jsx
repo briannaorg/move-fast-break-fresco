@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const layers = [
   { to: '/arriccio', label: 'Arriccio', sub: 'Curate' },
   { to: '/arriccio/projects', label: 'Sinopia', sub: 'Design' },
-  { to: '/intonaco/new', label: 'Intonaco', sub: 'Publish' },
+  { to: '/arriccio/projects', label: 'Intonaco', sub: 'Publish' },
 ];
 
 export default function Nav() {
