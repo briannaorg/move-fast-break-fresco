@@ -239,6 +239,7 @@ export default function SinopiaView() {
           src={previewUrl}
           style={s.iframe}
           title="Site preview"
+          sandbox="allow-scripts allow-same-origin"
         />
       </div>
     </div>

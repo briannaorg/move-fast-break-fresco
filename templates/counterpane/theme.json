@@ -85,6 +85,32 @@
       }
     }
   },
+  "fonts": {
+    "Playfair Display": {
+      "googleFamily": "Playfair+Display:wght@400;700",
+      "weights": ["400", "700"]
+    },
+    "Lato": {
+      "googleFamily": "Lato:wght@400;600",
+      "weights": ["400", "600"]
+    },
+    "Merriweather": {
+      "googleFamily": "Merriweather:wght@400;700",
+      "weights": ["400", "700"]
+    },
+    "Open Sans": {
+      "googleFamily": "Open+Sans:wght@400;600",
+      "weights": ["400", "600"]
+    },
+    "Cormorant Garamond": {
+      "googleFamily": "Cormorant+Garamond:wght@400;700",
+      "weights": ["400", "700"]
+    },
+    "Nunito": {
+      "googleFamily": "Nunito:wght@400;600",
+      "weights": ["400", "600"]
+    }
+  },
   "pages": {
     "supportMultiple": true,
     "defaultPages": ["index", "about", "gallery"],
